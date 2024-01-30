@@ -34,16 +34,16 @@ def hello():
         yt = YouTube(url, on_progress_callback=on_progress)
         buffer = BytesIO()
         
-        # Get the highest resolution video stream
+        # Getting the highest resolution
         video = yt.streams.filter(only_audio=False).order_by("resolution").desc().first()
         
-        # Download the video to the buffer
+        # Download the video
         video.stream_to_buffer(buffer)
         buffer.seek(0)
     except PytubeError:
         print("Error")
 
-    # Clean up the video title for use in the filename
+    # Clean up the video title
     clean_title = "".join(char if char.isalnum() or char in {' ', '_', '-'} else '' for char in video.title)
     clean_title = clean_title.strip()
 
