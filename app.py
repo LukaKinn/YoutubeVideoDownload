@@ -26,7 +26,7 @@ def favicon():
         "favicon.ico",
         mimetype="image/vnd.microsoft.icon",
     )
-
+    # Incase you want to record only audio change the only_audio to True and 'Content-Type' to audio/mp3 and 'Content-Disposition' to mp3
 @app.route("/hello", methods=["POST"])
 def hello():
     url = request.form.get("url")
@@ -34,16 +34,13 @@ def hello():
         yt = YouTube(url, on_progress_callback=on_progress)
         buffer = BytesIO()
         
-        # Getting the highest resolution
         video = yt.streams.filter(only_audio=False).order_by("resolution").desc().first()
         
-        # Download the video
         video.stream_to_buffer(buffer)
         buffer.seek(0)
     except PytubeError:
         print("Error")
 
-    # Clean up the video title
     clean_title = "".join(char if char.isalnum() or char in {' ', '_', '-'} else '' for char in video.title)
     clean_title = clean_title.strip()
 
