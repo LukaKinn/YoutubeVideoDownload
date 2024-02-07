@@ -9,7 +9,7 @@
 
     <style>
         body {
-            font-family: 'Times New Roman', sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
@@ -61,13 +61,15 @@
             background-color: #45a049;
         }
     </style>
+
 </head>
 
 <body>
     <h1>YouTube video and audio downloader</h1>
-    <form action="/hello" method="post">
+    <form action="/hello" method="post" onsubmit="updateFileTypes()">
         <label for="url">YouTube Video URL:</label>
         <input type="text" id="url" name="url" placeholder="Enter YouTube URL" required>
+
         <button type="submit">Download</button>
     </form>
 </body>
